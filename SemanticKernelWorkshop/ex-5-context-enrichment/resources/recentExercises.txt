@@ -1,0 +1,9 @@
+cardio|burpees
+resistance|pull-ups
+cardio|high knees
+resistance|goblet squats
+cardio|mountain climbers
+cardio|rower machine
+resistance|single-leg deadlift
+cardio|kickboxing
+resistance|kettlebell swings

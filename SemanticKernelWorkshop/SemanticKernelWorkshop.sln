@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-1-connect-to-llm", "ex-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-4-native-functions", "ex-4-native-functions\ex-4-native-functions.csproj", "{40BC31E4-D219-48C0-A1DA-23DC21BDD109}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-5-context-enrichment", "ex-5-context-enrichment\ex-5-context-enrichment.csproj", "{E675849E-BA6B-450D-B8F9-E8A489863E98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{40BC31E4-D219-48C0-A1DA-23DC21BDD109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40BC31E4-D219-48C0-A1DA-23DC21BDD109}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40BC31E4-D219-48C0-A1DA-23DC21BDD109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E675849E-BA6B-450D-B8F9-E8A489863E98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E675849E-BA6B-450D-B8F9-E8A489863E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E675849E-BA6B-450D-B8F9-E8A489863E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E675849E-BA6B-450D-B8F9-E8A489863E98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
