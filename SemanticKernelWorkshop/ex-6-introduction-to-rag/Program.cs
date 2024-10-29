@@ -90,6 +90,6 @@ Func<string, Task> Chat = async (string input) => {
     Console.WriteLine(result);
 };
 
-await Chat("Hello, can you tell me what actor Blastoise, The Rock is named after?");
+await Chat("Hello, can you tell me what actor the nickname for Blastoise is named after?");
 await Chat("Could you please tell me what pokemon is psychic from our previous conversation?");
 
