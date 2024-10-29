@@ -3,12 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>ex_1_connect_to_llm</RootNamespace>
+    <RootNamespace>ex_6_introduction_to_rag</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.SemanticKernel.Plugins.Memory " Version="1.20.0-alpha" />
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.22.0" />
   </ItemGroup>
 

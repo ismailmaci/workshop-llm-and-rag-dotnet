@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-4-native-functions", "ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-5-context-enrichment", "ex-5-context-enrichment\ex-5-context-enrichment.csproj", "{E675849E-BA6B-450D-B8F9-E8A489863E98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-6-introduction-to-rag", "ex-6-introduction-to-rag\ex-6-introduction-to-rag.csproj", "{B2C3334A-1C1F-44C7-9A89-A68175DFCBE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{E675849E-BA6B-450D-B8F9-E8A489863E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E675849E-BA6B-450D-B8F9-E8A489863E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E675849E-BA6B-450D-B8F9-E8A489863E98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C3334A-1C1F-44C7-9A89-A68175DFCBE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C3334A-1C1F-44C7-9A89-A68175DFCBE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C3334A-1C1F-44C7-9A89-A68175DFCBE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C3334A-1C1F-44C7-9A89-A68175DFCBE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
