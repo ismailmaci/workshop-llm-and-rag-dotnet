@@ -5,7 +5,9 @@ using Kernel = Microsoft.SemanticKernel.Kernel;
 
 Kernel kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
-
+        deploymentName: "",
+        endpoint: "",
+        apiKey: "")
     .Build();
 
 // Zero-shot prompting

@@ -12,7 +12,10 @@ string userInput;
 
 Console.Write("You: ");
 userInput = Console.ReadLine();
-await foreach (var update in kernel.InvokePromptStreamingAsync(userInput))
+
+KernelPlugin conversationSummaryPlugin = kernel.ImportPluginFromType<CharacterCountPlugin>();
+
+await foreach (var update in kernel.InvokeStreamingAsync(conversationSummaryPlugin["GetRCharacters"], new() { ["input"] = userInput }))
 {
     Console.Write(update);
 }
