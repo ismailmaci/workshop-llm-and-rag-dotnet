@@ -20,11 +20,16 @@ await memory.SaveInformationAsync(favoritePokemonCollection, "Venusaur, Nature B
 await memory.SaveInformationAsync(favoritePokemonCollection, "Snorlax, The Hulk", "pokemon5");
 await memory.SaveInformationAsync(favoritePokemonCollection, "Espeon, The Undertaker", "pokemon6");
 
-var question = @"What is the name of the Pokemon that is known as ""Nature Boy""?";
-
-var response = memory.SearchAsync(favoritePokemonCollection, question, 1, 0.8);
-
-await foreach (var item in response)
+var questions = new[]
 {
-    Console.Write(item?.Metadata.Text);
+    @"What is the name of the Pokemon that is known as ""Nature Boy""?",
+    "What is the name of the namename of Charizard?",
+    "Who is the best psychic type?"
+};
+
+foreach (var q in questions)
+{
+    var response = memory.SearchAsync(favoritePokemonCollection, q).ToBlockingEnumerable().FirstOrDefault();
+    Console.WriteLine("Q: " + q);
+    Console.WriteLine("A: " + response?.Relevance.ToString() + "\t" + response?.Metadata.Text);
 }
