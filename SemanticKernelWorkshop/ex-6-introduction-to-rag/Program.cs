@@ -1,4 +1,4 @@
-﻿using Microsoft.SemanticKernel.Connectors.OpenAI;
+﻿using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.Memory;
 
 #pragma warning disable SKEXP0001
@@ -6,16 +6,12 @@ using Microsoft.SemanticKernel.Memory;
 #pragma warning disable SKEXP0050
 
 const string favoritePokemonCollection = "FavoritePokemonCollection";
-var memoryBuilder = new MemoryBuilder();
 
-memoryBuilder.WithOpenAITextEmbeddingGeneration(
-    modelId: "text-embedding-3-small",
+var textEmbeddingService = new AzureOpenAITextEmbeddingGenerationService(
+    deploymentName: "embedding",
+    endpoint: "https://oai-aitoday-01.openai.azure.com",
     apiKey: "");
-
-var inMemoryVectorStore = new VolatileMemoryStore();
-memoryBuilder.WithMemoryStore(inMemoryVectorStore);
-
-var memory = memoryBuilder.Build();
+var memory = new SemanticTextMemory(new VolatileMemoryStore(), textEmbeddingService);
 
 await memory.SaveInformationAsync(favoritePokemonCollection, "Pikachu, The Sheik", "pokemon1");
 await memory.SaveInformationAsync(favoritePokemonCollection, "Charizard, The Ultimate Warrior", "pokemon2");
@@ -26,7 +22,7 @@ await memory.SaveInformationAsync(favoritePokemonCollection, "Espeon, The Undert
 
 var question = @"What is the name of the Pokemon that is known as ""Nature Boy""?";
 
-var response = memory.SearchAsync(favoritePokemonCollection, question, 1, 0.5);
+var response = memory.SearchAsync(favoritePokemonCollection, question, 1, 0.8);
 
 await foreach (var item in response)
 {
