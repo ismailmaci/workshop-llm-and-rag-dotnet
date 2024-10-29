@@ -4,9 +4,8 @@ using Microsoft.SemanticKernel.Experimental.Agents;
 using Kernel = Microsoft.SemanticKernel.Kernel;
 
 Kernel kernel = Kernel.CreateBuilder()
-    .AddOpenAIChatCompletion(
-        modelId: "gpt-4o-mini",
-        apiKey: "")
+    .AddAzureOpenAIChatCompletion(
+
     .Build();
 
 // Zero-shot prompting
