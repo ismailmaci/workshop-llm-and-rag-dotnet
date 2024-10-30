@@ -3,11 +3,13 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Experimental.Agents;
 using Kernel = Microsoft.SemanticKernel.Kernel;
 
+var settings = LlmService.LlmService.LoadSettings();
+
 Kernel kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
-        deploymentName: "",
-        endpoint: "",
-        apiKey: "")
+        deploymentName: settings.deploymentName,
+        endpoint: settings.endpoint,
+        apiKey: settings.apiKey)
     .Build();
 
 // Zero-shot prompting

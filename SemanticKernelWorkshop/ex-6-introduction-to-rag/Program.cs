@@ -9,10 +9,11 @@ using Microsoft.SemanticKernel.Plugins.Memory;
 
 const string favoritePokemonCollection = "FavoritePokemonCollection";
 
+var embeddingSettings = LlmService.LlmService.LoadEmbeddingSettings();
 var textEmbeddingService = new AzureOpenAITextEmbeddingGenerationService(
-    deploymentName: "embedding",
-    endpoint: "https://oai-aitoday-01.openai.azure.com",
-    apiKey: "");
+    deploymentName: embeddingSettings.deploymentName,
+    endpoint: embeddingSettings.endpoint,
+    apiKey: embeddingSettings.apiKey);
 var memory = new SemanticTextMemory(new VolatileMemoryStore(), textEmbeddingService);
 
 await memory.SaveInformationAsync(favoritePokemonCollection, "Pikachu, The Sheik", "pokemon1");
@@ -36,11 +37,12 @@ foreach (var q in questions)
     Console.WriteLine("A: " + response?.Relevance.ToString() + "\t" + response?.Metadata.Text);
 }
 
+var settings = LlmService.LlmService.LoadSettings();
 Kernel kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
-        deploymentName: "gpt-4o",
-        endpoint: "https://oai-aitoday-01.openai.azure.com",
-        apiKey: "")
+        deploymentName: settings.deploymentName,
+        endpoint: settings.endpoint,
+        apiKey: settings.apiKey)
     .Build();
     
 kernel.ImportPluginFromObject(new TextMemoryPlugin(memory));

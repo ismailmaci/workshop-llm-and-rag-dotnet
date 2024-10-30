@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.SemanticKernel.Experimental.Agents" Version="1.18.2-alpha" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LlmService\LlmService.csproj" />
+  </ItemGroup>
+  
 </Project>

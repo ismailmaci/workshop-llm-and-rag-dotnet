@@ -16,5 +16,9 @@
   <ItemGroup>
     <Folder Include="resources/" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LlmService\LlmService.csproj" />
+  </ItemGroup>
   
 </Project>

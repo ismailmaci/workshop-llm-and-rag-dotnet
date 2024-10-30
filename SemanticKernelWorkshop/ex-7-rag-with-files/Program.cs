@@ -1,14 +1,17 @@
-﻿using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
+﻿using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.Memory;
+using Microsoft.SemanticKernel.TextToImage;
 
 #pragma warning disable SKEXP0001, SKEXP0010, SKEXP0050
 
 const string pokedexEntryCollection = "PokedexEntryCollection";
 
+var embeddingSettings = LlmService.LlmService.LoadEmbeddingSettings();
 var textEmbeddingService = new AzureOpenAITextEmbeddingGenerationService(
-    deploymentName: "embedding",
-    endpoint: "https://oai-aitoday-01.openai.azure.com",
-    apiKey: "");
+    deploymentName: embeddingSettings.deploymentName,
+    endpoint: embeddingSettings.endpoint,
+    apiKey: embeddingSettings.apiKey);
 
 var memory = new SemanticTextMemory(new VolatileMemoryStore(), textEmbeddingService);
 
@@ -21,7 +24,7 @@ foreach (var entry in pokedex)
     await memory.SaveInformationAsync(pokedexEntryCollection, entry, i++.ToString());
 }
 
-string ask = "I love fire type pokemon, can you name 5 for me?";
+string ask = "I love grass type pokemon, can you name 5 for me?";
 Console.WriteLine("===========================\n" +
                     "Query: " + ask + "\n");
 
@@ -36,3 +39,17 @@ await foreach (var m in memories)
     Console.WriteLine();
 }
 
+var settings = LlmService.LlmService.LoadSettings();
+Kernel kernel = Kernel.CreateBuilder()
+    .AddAzureOpenAIChatCompletion(
+        deploymentName: settings.deploymentName,
+        endpoint: settings.endpoint,
+        apiKey: settings.apiKey)
+    .AddOpenAITextToImage(
+        //azure instance does not have a text-to-image service, resort to the openai service
+        apiKey: "")
+    .Build();
+
+var dallE = kernel.GetRequiredService<ITextToImageService>();
+var imageUrl = await dallE.GenerateImageAsync(memories.ToBlockingEnumerable().FirstOrDefault().Metadata.Text, 512, 512);
+Console.WriteLine("Image URL: " + imageUrl);
