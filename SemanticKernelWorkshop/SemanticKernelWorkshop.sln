@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-5-context-enrichment", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-6-introduction-to-rag", "ex-6-introduction-to-rag\ex-6-introduction-to-rag.csproj", "{B2C3334A-1C1F-44C7-9A89-A68175DFCBE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-7-rag-with-files", "ex-7-rag-with-files\ex-7-rag-with-files.csproj", "{20C50B69-1B82-426A-B44C-7FA9CE7A625F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-7-advanced-rag-features", "ex-7-rag-with-files\ex-7-advanced-rag-features.csproj", "{20C50B69-1B82-426A-B44C-7FA9CE7A625F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LlmService", "LlmService\LlmService.csproj", "{726A4543-30C4-402B-B53C-AE18B16F925F}"
 EndProject
