@@ -17,22 +17,22 @@ var zeroShotPrompt = "";
 var zeroShotReply = await kernel.InvokePromptAsync(zeroShotPrompt);
 Console.WriteLine("Zero-shot Prompting: " + zeroShotReply);
 
-// One-shot prompting. Try to translate something from English to French.
+// One-shot prompting. Try to translate something from English to French. Provide one example.
 var oneShotPrompt = @"";
 var oneShotReply = await kernel.InvokePromptAsync(oneShotPrompt);
 Console.WriteLine("One-shot Prompting: " + oneShotReply);
 
-// Few-shot prompting. Try to convert Euros to US Dollars.
+// Few-shot prompting. Try to convert Euros to US Dollars. Provide multiple examples.
 var fewShotPrompt = @"";
 var fewShotReply = await kernel.InvokePromptAsync(fewShotPrompt);
 Console.WriteLine(fewShotReply.ToString().Trim());
 
-// Chain-of-thought prompting. Try to calculate the distance between Antwerp and Ghent.
+// Chain-of-thought prompting. Try to calculate the distance between Antwerp and Ghent. Ask for the model's reasoning.
 var chainOfThoughtPrompt = @"";
 var chainOfThoughtReply = await kernel.InvokePromptAsync(chainOfThoughtPrompt);
 Console.WriteLine("Answer:\n" + chainOfThoughtReply);
 
-// Using system prompts. Try to impersonate the LLM as a travel assistant.
+// Using system prompts. Try to impersonate the LLM as a travel assistant..
 var systemPrompt = @"";
 
 ChatCompletionAgent chatAgent = new ChatCompletionAgent(kernel, systemPrompt);
