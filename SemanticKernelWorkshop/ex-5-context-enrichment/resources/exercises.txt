@@ -1,39 +1,39 @@
-cardio|burpees
 resistance|pull-ups
-cardio|high knees
 resistance|goblet squats
+resistance|single-leg deadlift
+resistance|kettlebell swings
+resistance|bench press
+resistance|lat pulldowns
+resistance|push-ups
+resistance|bicep curls
+resistance|glute bridge
+resistance|incline chest press
+resistance|reverse lunges
+resistance|deadlifts
+resistance|shoulder press
+resistance|dumbbell rows
+resistance|side lunges
+resistance|calf raises
+resistance|tricep extensions
+resistance|chest fly
+resistance|weighted step-ups
+cardio|burpees
+cardio|high knees
 cardio|mountain climbers
 cardio|rower machine
-resistance|single-leg deadlift
 cardio|kickboxing
-resistance|kettlebell swings
 cardio|jump rope
-resistance|bench press
 cardio|stair climber
-resistance|lat pulldowns
 cardio|hill sprints
-resistance|push-ups
 cardio|shadow boxing
-resistance|bicep curls
 cardio|treadmill sprints
-resistance|glute bridge
 cardio|jumping jacks
-resistance|incline chest press
 cardio|battle ropes
-resistance|reverse lunges
 cardio|elliptical machine
-resistance|deadlifts
 cardio|bicycle crunches
-resistance|shoulder press
 cardio|jump squats
-resistance|dumbbell rows
 cardio|swimming laps
-resistance|side lunges
 cardio|stationary cycling
-resistance|calf raises
 cardio|skaters
-resistance|tricep extensions
 cardio|burpee tuck jumps
-resistance|chest fly
 cardio|hiking
-resistance|weighted step-ups

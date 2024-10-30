@@ -7,8 +7,10 @@ public class ExercisePlugin
     public string ListExercises()
     {
         var directory = Directory.GetCurrentDirectory();
-        var exercises = File.ReadAllText(Path.Combine(directory, "resources/exercises.txt"));
-        return exercises;
+        var exercises = File.ReadAllLines(Path.Combine(directory, "resources/exercises.txt"));
+        var truncatedExercises = exercises.Skip(20);
+        var flattenedExercises = string.Join(", ", truncatedExercises);
+        return flattenedExercises;
     }
 
     [KernelFunction, Description(@"Return exercises requested by the user.")]
