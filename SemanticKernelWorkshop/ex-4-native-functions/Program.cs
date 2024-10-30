@@ -10,21 +10,10 @@ var builder = Kernel.CreateBuilder()
         deploymentName: deploymentName,
         endpoint: endpoint,
         apiKey: apiKey);
-builder.Plugins.AddFromType<CharacterCountPlugin>();
-var kernel = builder.Build();
 
-var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new() 
-{
-    FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
-};
+var kernel = builder.Build();
 
 Console.Write("You: ");
 var userInput = Console.ReadLine() ?? "";
 
-var result = await chatCompletionService.GetChatMessageContentAsync(
-    prompt: userInput,
-    executionSettings: openAIPromptExecutionSettings,
-    kernel: kernel);
 
-Console.Write(result);

@@ -10,3 +10,6 @@ Learn how to extend the LLM's capabilities by integrating custom tools and servi
 ## Exercises
 1. Implement a method that counts the "r's" in a string.
 2. Configure the LLM to use this tool when generating responses.
+
+## Starting point
+https://learn.microsoft.com/en-us/semantic-kernel/concepts/plugins/?pivots=programming-language-csharp

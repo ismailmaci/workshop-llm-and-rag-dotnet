@@ -10,6 +10,7 @@ Explore RAG concepts and understand when to apply them.
 
 ## Exercises
 1. Discuss the differences between traditional search (e.g., Elasticsearch) and vector databases.
+2. View the pokemon implementation. Do the same for the dnd_bestiary and recipes files.
 
 ## Notes
 For this module we've chosen to exclude a reranker, as it's not necessary for the exercises. 
