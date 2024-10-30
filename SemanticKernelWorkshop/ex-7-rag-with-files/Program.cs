@@ -1,9 +1,6 @@
-﻿using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
+﻿using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.Memory;
-using Microsoft.SemanticKernel.TextToImage;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
 
 #pragma warning disable SKEXP0001, SKEXP0010, SKEXP0050
 
@@ -40,17 +37,3 @@ await foreach (var m in memories)
     Console.WriteLine();
 }
 
-var (deploymentName, endpoint, apiKey) = LlmService.LlmService.LoadSettings();
-var kernel = Kernel.CreateBuilder()
-    .AddAzureOpenAIChatCompletion(
-        deploymentName: deploymentName,
-        endpoint: endpoint,
-        apiKey: apiKey)
-    .AddOpenAITextToImage(
-        //azure instance does not have a text-to-image service, resort to the openai service
-        apiKey: "")
-    .Build();
-
-var dallE = kernel.GetRequiredService<ITextToImageService>();
-var imageUrl = await dallE.GenerateImageAsync(memories.ToBlockingEnumerable().FirstOrDefault().Metadata.Text, 512, 512);
-Console.WriteLine("Image URL: " + imageUrl);
