@@ -18,10 +18,10 @@ var textEmbeddingService = new AzureOpenAITextEmbeddingGenerationService(
 
 var memory = new SemanticTextMemory(new VolatileMemoryStore(), textEmbeddingService);
 var directory = Directory.GetCurrentDirectory();
-var pokedex = File.ReadAllLines(Path.Combine(directory, "resources/pokedex.txt"));
+var pokedex = File.ReadAllText(Path.Combine(directory, "resources/pokedex.txt"));
 var i = 0;
-
-foreach (var entry in pokedex)
+var pokedexEntries = pokedex.Split("Name: ").Skip(1);
+foreach (var entry in pokedexEntries)
 {
     await memory.SaveInformationAsync(pokedexEntryCollection, entry, i++.ToString());
 }
