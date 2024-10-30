@@ -13,3 +13,5 @@ Learn how to extend the LLM's capabilities by integrating custom tools and servi
 
 ## Starting point
 https://learn.microsoft.com/en-us/semantic-kernel/concepts/plugins/?pivots=programming-language-csharp
+https://learn.microsoft.com/en-us/semantic-kernel/concepts/planning?pivots=programming-language-csharp
+
