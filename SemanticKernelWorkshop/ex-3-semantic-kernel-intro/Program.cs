@@ -1,18 +1,16 @@
 ﻿using Microsoft.SemanticKernel;
 using Kernel = Microsoft.SemanticKernel.Kernel;
 
-var settings = LlmService.LlmService.LoadSettings();
+var (deploymentName, endpoint, apiKey) = LlmService.LlmService.LoadSettings();
 Kernel kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
-        deploymentName: settings.deploymentName,
-        endpoint: settings.endpoint,
-        apiKey: settings.apiKey)
+        deploymentName: deploymentName,
+        endpoint: endpoint,
+        apiKey: apiKey)
     .Build();
 
-string userInput;
-
 Console.Write("You: ");
-userInput = Console.ReadLine();
+var userInput = Console.ReadLine() ?? "";
 
 KernelPlugin conversationSummaryPlugin = kernel.ImportPluginFromType<AssistantPlugin>();
 

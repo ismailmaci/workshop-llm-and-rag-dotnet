@@ -3,13 +3,13 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Experimental.Agents;
 using Kernel = Microsoft.SemanticKernel.Kernel;
 
-var settings = LlmService.LlmService.LoadSettings();
+var (deploymentName, endpoint, apiKey) = LlmService.LlmService.LoadSettings();
 
 Kernel kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
-        deploymentName: settings.deploymentName,
-        endpoint: settings.endpoint,
-        apiKey: settings.apiKey)
+        deploymentName: deploymentName,
+        endpoint: endpoint,
+        apiKey: apiKey)
     .Build();
 
 // Zero-shot prompting
@@ -64,15 +64,3 @@ foreach (var message in response)
 {
     Console.WriteLine("Recommendations:\n" + message.ToString());
 }
-
-// Correcting incorrect responses
-var incorrectResponsePrompt = "Is it always raining in Belgium?";
-var incorrectResponseReply = await kernel.InvokePromptAsync(incorrectResponsePrompt);
-Console.WriteLine("Initial Response:\n" + incorrectResponseReply);
-
-var clarifiedPrompt = @"
-Provide a detailed answer considering Belgium's climate and seasons:
-Is it always raining in Belgium?
-";
-var improvedResponseReply = await kernel.InvokePromptAsync(clarifiedPrompt);
-Console.WriteLine("Improved Response:\n" + improvedResponseReply);

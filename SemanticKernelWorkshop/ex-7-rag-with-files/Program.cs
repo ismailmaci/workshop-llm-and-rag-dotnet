@@ -9,11 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 const string pokedexEntryCollection = "PokedexEntryCollection";
 
-var embeddingSettings = LlmService.LlmService.LoadEmbeddingSettings();
+var (deploymentNameEmbedding, endpointEmbedding, apiKeyEmbedding) = LlmService.LlmService.LoadEmbeddingSettings();
 var textEmbeddingService = new AzureOpenAITextEmbeddingGenerationService(
-    deploymentName: embeddingSettings.deploymentName,
-    endpoint: embeddingSettings.endpoint,
-    apiKey: embeddingSettings.apiKey,
+    deploymentName: deploymentNameEmbedding,
+    endpoint: endpointEmbedding,
+    apiKey: apiKeyEmbedding,
     loggerFactory: LoggerFactory.Create(builder => builder.SetMinimumLevel(LogLevel.Trace)));
 
 var memory = new SemanticTextMemory(new VolatileMemoryStore(), textEmbeddingService);
@@ -40,18 +40,16 @@ await foreach (var m in memories)
     Console.WriteLine();
 }
 
-var settings = LlmService.LlmService.LoadSettings();
-var k = Kernel.CreateBuilder()
+var (deploymentName, endpoint, apiKey) = LlmService.LlmService.LoadSettings();
+var kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
-        deploymentName: settings.deploymentName,
-        endpoint: settings.endpoint,
-        apiKey: settings.apiKey)
+        deploymentName: deploymentName,
+        endpoint: endpoint,
+        apiKey: apiKey)
     .AddOpenAITextToImage(
         //azure instance does not have a text-to-image service, resort to the openai service
-        apiKey: "");
-k.Services.AddLogging(service => service.AddConsole().SetMinimumLevel(LogLevel.Debug));
-
-var kernel = k.Build();
+        apiKey: "")
+    .Build();
 
 var dallE = kernel.GetRequiredService<ITextToImageService>();
 var imageUrl = await dallE.GenerateImageAsync(memories.ToBlockingEnumerable().FirstOrDefault().Metadata.Text, 512, 512);

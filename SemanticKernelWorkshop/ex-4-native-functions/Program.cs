@@ -4,12 +4,12 @@ using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Kernel = Microsoft.SemanticKernel.Kernel;
 #pragma warning disable SKEXP0001
 
-var settings = LlmService.LlmService.LoadSettings();
+var (deploymentName, endpoint, apiKey) = LlmService.LlmService.LoadSettings();
 var builder = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
-        deploymentName: settings.deploymentName,
-        endpoint: settings.endpoint,
-        apiKey: settings.apiKey);
+        deploymentName: deploymentName,
+        endpoint: endpoint,
+        apiKey: apiKey);
 builder.Plugins.AddFromType<CharacterCountPlugin>();
 var kernel = builder.Build();
 
