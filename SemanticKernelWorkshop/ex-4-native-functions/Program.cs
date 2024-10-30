@@ -1,22 +1,30 @@
 ﻿using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Kernel = Microsoft.SemanticKernel.Kernel;
+#pragma warning disable SKEXP0001
 
 var settings = LlmService.LlmService.LoadSettings();
-Kernel kernel = Kernel.CreateBuilder()
+var builder = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
         deploymentName: settings.deploymentName,
         endpoint: settings.endpoint,
-        apiKey: settings.apiKey)
-    .Build();
+        apiKey: settings.apiKey);
+builder.Plugins.AddFromType<CharacterCountPlugin>();
+var kernel = builder.Build();
 
-string userInput;
+var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new() 
+{
+    FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+};
 
 Console.Write("You: ");
-userInput = Console.ReadLine();
+var userInput = Console.ReadLine() ?? "";
 
-KernelPlugin conversationSummaryPlugin = kernel.ImportPluginFromType<CharacterCountPlugin>();
+var result = await chatCompletionService.GetChatMessageContentAsync(
+    prompt: userInput,
+    executionSettings: openAIPromptExecutionSettings,
+    kernel: kernel);
 
-await foreach (var update in kernel.InvokeStreamingAsync(conversationSummaryPlugin["GetRCharacters"], new() { ["input"] = userInput }))
-{
-    Console.Write(update);
-}
+Console.Write(result);

@@ -2,6 +2,8 @@
 using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.Memory;
 using Microsoft.SemanticKernel.TextToImage;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #pragma warning disable SKEXP0001, SKEXP0010, SKEXP0050
 
@@ -11,10 +13,10 @@ var embeddingSettings = LlmService.LlmService.LoadEmbeddingSettings();
 var textEmbeddingService = new AzureOpenAITextEmbeddingGenerationService(
     deploymentName: embeddingSettings.deploymentName,
     endpoint: embeddingSettings.endpoint,
-    apiKey: embeddingSettings.apiKey);
+    apiKey: embeddingSettings.apiKey,
+    loggerFactory: LoggerFactory.Create(builder => builder.SetMinimumLevel(LogLevel.Trace)));
 
 var memory = new SemanticTextMemory(new VolatileMemoryStore(), textEmbeddingService);
-
 var directory = Directory.GetCurrentDirectory();
 var pokedex = File.ReadAllLines(Path.Combine(directory, "resources/pokedex.txt"));
 var i = 0;
@@ -29,7 +31,6 @@ Console.WriteLine("===========================\n" +
                     "Query: " + ask + "\n");
 
 var memories = memory.SearchAsync(pokedexEntryCollection, ask, limit: 5, minRelevanceScore: 0.77);
-
 i = 0;
 await foreach (var m in memories)
 {
@@ -40,15 +41,17 @@ await foreach (var m in memories)
 }
 
 var settings = LlmService.LlmService.LoadSettings();
-Kernel kernel = Kernel.CreateBuilder()
+var k = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
         deploymentName: settings.deploymentName,
         endpoint: settings.endpoint,
         apiKey: settings.apiKey)
     .AddOpenAITextToImage(
         //azure instance does not have a text-to-image service, resort to the openai service
-        apiKey: "")
-    .Build();
+        apiKey: "");
+k.Services.AddLogging(service => service.AddConsole().SetMinimumLevel(LogLevel.Debug));
+
+var kernel = k.Build();
 
 var dallE = kernel.GetRequiredService<ITextToImageService>();
 var imageUrl = await dallE.GenerateImageAsync(memories.ToBlockingEnumerable().FirstOrDefault().Metadata.Text, 512, 512);

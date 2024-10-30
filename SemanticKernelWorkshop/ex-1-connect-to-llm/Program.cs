@@ -10,11 +10,10 @@ Kernel kernel = Kernel.CreateBuilder()
         apiKey: settings.apiKey)
     .Build();
 
-string userInput;
-
 Console.Write("You: ");
-userInput = Console.ReadLine();
+var userInput = Console.ReadLine() ?? string.Empty;
 await foreach (var update in kernel.InvokePromptStreamingAsync(userInput))
 {
+    await Task.Delay(50);
     Console.Write(update);
 }
