@@ -9,6 +9,7 @@ Kernel kernel = Kernel.CreateBuilder()
         apiKey: apiKey)
     .Build();
 
+kernel.ImportPluginFromType<ExercisePlugin>();
 
 var prompt = @"Suggest exercises for me."
     + "If none can be found, apologize to the user and give no other exercises."

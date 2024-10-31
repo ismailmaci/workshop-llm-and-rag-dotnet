@@ -15,3 +15,6 @@ var kernel = Kernel.CreateBuilder()
         apiKey: "")
     .Build();
 
+var dallE = kernel.GetRequiredService<ITextToImageService>();
+var imageUrl = await dallE.GenerateImageAsync("A corgi", 512, 512);
+Console.WriteLine("Image URL: " + imageUrl);
